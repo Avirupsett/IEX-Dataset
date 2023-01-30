@@ -10,7 +10,7 @@ def hello_world():
     return 'Hello, World!'
 
 @app.route('/linechart', methods=['GET'])
-def hello_world():
+def line_data():
     df=pd.read_csv("Price_Volume_PurBid_SellBid_PurchaseVol_SellVol_For_Market_2 (1).csv")
     df["TimeStamp_date"]=int(datetime.datetime.timestamp(df["BlockStartTime"]))
     combine=df[["TimeStamp_date","MCPValues"]].values.tolist()
