@@ -9,12 +9,14 @@ app.url_map.strict_slashes = False
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/linechart', methods=['GET'])
+@app.route('/linechart')
 def line_data():
     df=pd.read_csv("Price_Volume_PurBid_SellBid_PurchaseVol_SellVol_For_Market_2 (1).csv")
-    df["TimeStamp_date"]=int(datetime.datetime.timestamp(df["BlockStartTime"]))
+    df["BlockStartTime"]=pd.to_datetime(df["BlockStartTime"])
+    df["TimeStamp_date"]=df["BlockStartTime"].astype('int64')
     combine=df[["TimeStamp_date","MCPValues"]].values.tolist()
-    output = {'results': combine}
 
     # return data
-    return jsonify(results=output)
+    return jsonify(results=combine)
+
+app.run(host="0.0.0.0",debug=True)
