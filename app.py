@@ -19,4 +19,4 @@ def line_data():
     # return data
     return jsonify(results=combine)
 
-app.run(host="0.0.0.0",debug=True)
+# app.run(host="0.0.0.0",debug=True)
