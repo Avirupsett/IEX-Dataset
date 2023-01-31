@@ -13,7 +13,7 @@ def hello_world():
 def line_data():
     df=pd.read_csv("Price_Volume_PurBid_SellBid_PurchaseVol_SellVol_For_Market_2 (1).csv")
     df["BlockStartTime"]=pd.to_datetime(df["BlockStartTime"])
-    df["TimeStamp_date"]=df["BlockStartTime"].astype('int64')//10**9
+    df["TimeStamp_date"]=df["BlockStartTime"].astype('int64')//10**6
     combine=df[["TimeStamp_date","MCPValues"]].values.tolist()
 
     # return data
