@@ -14,7 +14,8 @@ def line_data():
     df=pd.read_csv("Price_Volume_PurBid_SellBid_PurchaseVol_SellVol_For_Market_2 (1).csv")
     df["BlockStartTime"]=pd.to_datetime(df["BlockStartTime"])
     df["TimeStamp_date"]=df["BlockStartTime"].astype('int64')//10**6
-    combine=df[["TimeStamp_date","MCPValues"]].values.tolist()
+    df=df.rename(columns={"TimeStamp_date":"x","MCPValues":"y"})
+    combine=df[["x","y"]].to_json(orient="records")
 
     # return data
     return jsonify(results=combine)
