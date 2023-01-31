@@ -13,11 +13,10 @@ def hello_world():
 def line_data():
     df=pd.read_csv("Price_Volume_PurBid_SellBid_PurchaseVol_SellVol_For_Market_2 (1).csv")
     df["BlockStartTime"]=pd.to_datetime(df["BlockStartTime"])
-    df["TimeStamp_date"]=df["BlockStartTime"].astype('int64')//10**6
-    df=df.rename(columns={"TimeStamp_date":"x","MCPValues":"y"})
+    df=df.rename(columns={"BlockStartTime":"x","MCPValues":"y"})
     combine=df[["x","y"]].to_json(orient="records")
 
     # return data
-    return jsonify(results=combine)
+    return combine
 
 # app.run(host="0.0.0.0",debug=True)
